@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_17_165741) do
+ActiveRecord::Schema.define(version: 2021_01_17_174026) do
 
   create_table "images", force: :cascade do |t|
     t.string "title"
@@ -18,6 +18,13 @@ ActiveRecord::Schema.define(version: 2021_01_17_165741) do
     t.string "location"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_images_on_user_id"
+  end
+
+  create_table "images_tags", id: false, force: :cascade do |t|
+    t.integer "image_id", null: false
+    t.integer "tag_id", null: false
   end
 
   create_table "tags", force: :cascade do |t|
@@ -51,4 +58,5 @@ ActiveRecord::Schema.define(version: 2021_01_17_165741) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "images", "users"
 end
