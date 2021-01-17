@@ -19,6 +19,12 @@ module Types
     field :tokens, String, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+    field :images, [Types::ImageType], null: true
+    field :images_count, Integer, null:true
+
+    def images_count
+      object.images.size
+    end
 
   end
 end
